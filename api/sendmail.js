@@ -7,7 +7,6 @@ const router = express.Router();
 const host = process.env.MAIL_HOST;
 const user = process.env.MAIL_USER;
 const pass = process.env.MAIL_PASS;
-const from = process.env.MAIL_FROM;
 const to = process.env.MAIL_TO;
 
 const transporter = nodemailer.createTransport({
@@ -24,7 +23,7 @@ const transporter = nodemailer.createTransport({
 router.post("/", (req, res) => {
   const { message, name, email } = req.body;
   const mailData = {
-    from,
+    from: email,
     to,
     subject: `New message from ${name} - ${email}`,
     text: message,
